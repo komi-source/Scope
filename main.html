@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Scope</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Orbitron:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Cosmic Theme */
+        :root {
+            --primary-color: #a0c4ff; /* Pale Blue Glow */
+            --secondary-color: #3b82f6; /* Button Blue */
+            --background-color: #0b1120; /* Deep Space */
+            --dark-gray: #1f2937; 
+            --light-text: #e5e7eb;
+            --error-color: #ef4444; /* Red for error */
+        }
+
+        /* --- Global and Body Styles --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Обеспечивает идеальное центрирование содержимого по вертикали и горизонтали */
+            justify-content: center; 
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* --- Starfield Background Effect --- */
+        .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+            background: radial-gradient(200px 200px at 50% 50%, rgba(255, 255, 255, 0.2), transparent),
+                        url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="0.5" fill="%23fff"/><circle cx="50" cy="80" r="0.3" fill="%23fff"/><circle cx="90" cy="30" r="0.4" fill="%23fff"/><circle cx="30" cy="50" r="0.6" fill="%23fff"/><circle cx="70" cy="20" r="0.5" fill="%23fff"/></svg>') repeat;
+            animation: moveStars 100s linear infinite;
+        }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+        
+        /* --- Анимация "Энергетический Пульс" --- */
+        @keyframes logoPulse {
+            0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 30px var(--primary-color), 0 0 10px #ffffff; }
+            50% { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 50px var(--primary-color), 0 0 20px #ffffff; } /* Усиление свечения и небольшое увеличение */
+            100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 30px var(--primary-color), 0 0 10px #ffffff; }
+        }
+
+        /* --- Main Content Container --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            position: relative;
+            z-index: 10;
+            gap: 48px; /* Replaces space-y-12, for main sections */
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* --- Title Styling --- */
+        .logo-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 40px; /* Base size for mobile */
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 0.15em;
+            color: white;
+            margin-top: 16px;
+        }
+        
+        /* --- Image Uploader Section --- */
+        .uploader-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px; /* Space between logo and button */
+        }
+
+        /* Image Placeholder */
+        #image-placeholder {
+            width: 160px; /* Further reduced mobile size: 160px */
+            height: 160px;
+            background-color: var(--dark-gray);
+            border: 4px dashed var(--primary-color);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 
+                0 0 30px var(--primary-color),
+                0 0 10px #ffffff;
+            /* Обеспечиваем плавный переход для всех свойств */
+            transition: all 0.5s ease-in-out; 
+            cursor: pointer; /* Указатель, чтобы показать интерактивность */
+        }
+
+        /* --- Художественный эффект при наведении --- */
+        #image-placeholder:hover {
+            border-color: white;
+            /* Применяем анимацию пульсации на ховер */
+            animation: logoPulse 1.5s ease-in-out infinite alternate; 
+        }
+        
+        #user-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7; /* Initial opacity for placeholder */
+            transition: opacity 0.5s ease;
+        }
+
+        /* Upload Button (оставлено для полноты) */
+        #upload-button {
+            padding: 8px 24px;
+            background-color: #4b5563; /* Gray-700 */
+            color: white;
+            border: none;
+            border-radius: 9999px; /* Rounded-full */
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #upload-button:hover {
+            background-color: #6b7280; /* Gray-600 */
+        }
+
+        /* Description Text */
+        .description-text {
+            font-size: 1rem; /* Reduced from 1.25rem */
+            color: var(--light-text);
+            font-weight: 300;
+            max-width: 500px;
+            text-align: center;
+            letter-spacing: 0.05em;
+            margin-top: -16px; /* Adjust spacing since main container uses gap */
+        }
+
+        /* --- Navigation Button Styling --- */
+        .enter-button {
+            display: inline-block;
+            padding: 12px 25px; /* Further reduced padding */
+            font-size: 1.1rem; /* Further reduced font size */
+            font-weight: 600;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none; /* Remove underline */
+            color: white;
+            
+            /* Gradient background */
+            background: linear-gradient(135deg, #1d4ed8, var(--secondary-color)); 
+            
+            /* Glow effect */
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
+            
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .enter-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary-color), 0 0 5px #fff;
+            background: linear-gradient(135deg, var(--secondary-color), #60a5fa);
+        }
+
+        /* --- Mobile Restriction Styles (New Code) --- */
+        .mobile-restriction {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            z-index: 100; /* Ensure it's on top of everything */
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .restriction-icon {
+            font-size: 4rem;
+            color: var(--error-color);
+            margin-bottom: 30px;
+            margin-right: 50px;
+            text-shadow: 0 0 15px var(--error-color);
+        }
+
+        .restriction-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem; /* Reduced from 2.5rem */
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            margin-right: 70px;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .restriction-message {
+            font-size: 1rem; /* Reduced from 1.25rem */
+            color: var(--light-text);
+            max-width: 400px;
+            margin-right: 50px;
+            line-height: 1.6;
+        }
+
+        /* --- Desktop Responsive Adjustments (md breakpoint) --- */
+        @media (min-width: 768px) {
+            .logo-title {
+                font-size: 80px; /* Desktop size: 5rem */
+            }
+            #image-placeholder {
+                width: 224px; /* Further reduced desktop size: 224px */
+                height: 224px;
+            }
+            .description-text {
+                font-size: 1.5rem; /* Keeping desktop size */
+            }
+        }
+
+        /* --- Mobile Breakpoint (Block access on screens <= 767px) --- */
+        @media (max-width: 767px) {
+            .main-content {
+                display: none !important; /* Hide main content on small screens */
+            }
+            .mobile-restriction {
+                display: flex; /* Show restriction message */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Subtle Starfield Background -->
+    <div class="starfield"></div>
+
+    <div class="main-content">
+
+        <!-- Image Uploader Section -->
+        <div class="uploader-section">
+            <!-- Image Placeholder -->
+            <div id="image-placeholder">
+                <!-- Hidden file input for logo selection -->
+                <input type="file" id="image-input" accept="image/*" style="display: none;">
+                <img id="user-image" src="logo.png" alt="User Logo Placeholder">
+            </div>
+        </div>
+        
+        <!-- Description -->
+        <p class="description-text">
+            WE SEEK | WE EXPLORE | WE THRIVE
+        </p>
+
+        <!-- Navigation Button -->
+        <a href="scope.html" class="enter-button">
+            Enter the Scope 
+        </a>
+    </div>
+
+    <div class="mobile-restriction">
+        <div class="starfield" style="opacity: 1;"></div>
+        <div style="position: relative; z-index: 11;">
+
+            <div class="restriction-icon">⚠️</div>
+            <h2 class="restriction-title" >ACCESS DENIED: DIMENSIONAL LIMIT</h2>
+            <p class="restriction-message">
+                The Scope requires a stable, wide-band connection optimized for larger stellar displays. Please utilize a desktop or tablet interface to proceed with the mission.
+            </p>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const imageInput = document.getElementById('image-input');
+        const uploadButton = document.getElementById('upload-button');
+        const userImage = document.getElementById('user-image');
+
+        if (uploadButton) {
+            // Trigger hidden file input when custom button is clicked
+            uploadButton.addEventListener('click', () => {
+                imageInput.click();
+            });
+        }
+        
+
+        // Handle file change
+        imageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userImage.src = e.target.result;
+                    userImage.style.opacity = '1'; 
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

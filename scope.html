@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Catalog Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="container">
+        <div id="solar-system-display">
+            <h2 class="panel-title">Exoplanet Data Analyzer</h2>
+            
+            <div id="control-panel">
+                <select id="filter-type" class="control-select">
+                    <option value="all">Filter by Type</option>
+                    <option value="hot_jupiter">Hot Jupiters</option>
+                    <option value="neptune_like">Neptune-like</option>
+                    <option value="super_earth">Super-Earths</option>
+                    <option value="other">Protoplanets/Other</option>
+                </select>
+                <button id="desert-button" class="control-button">Highlight Neptunian Desert</button>
+                <button id="sort-mass-button" class="control-button">Sort List (Mass ↓)</button>
+            </div>
+            
+            <div id="visualization-area"> 
+                <div class="plot-caption">Exoplanet Mass ($M_\oplus$) vs. Orbital Period (days)</div>
+                </div>
+        </div>
+
+        <div id="info-panel">
+            <h2 class="panel-title">Exoplanet Catalog Overview</h2>
+            
+            <div id="screen-list" class="screen active-screen">
+                <div id="planet-list" style="margin-top: 100px;">
+                    <button class="planet-button" data-planet="toi1203e">TOI-1203e (Gas Giant)</button> 
+                    <button class="planet-button" data-planet="pegasiB">51 Pegasi b (Hot Jupiter)</button>
+                    <button class="planet-button" data-planet="aurigaeB">AB Aurigae b (Protoplanet)</button>
+                    <button class="planet-button" data-planet="wasp12b">WASP-12b (Doomed Giant)</button>
+                    <button class="planet-button" data-planet="gliese436b">Gliese 436 b (Hot Neptune)</button>
+                    <button class="planet-button" data-planet="hatp11b">HAT-P-11 b (Exo-Neptune)</button>
+                    <button class="planet-button" data-planet="kepler1922b">Kepler-1922 b (Ice Giant)</button>
+                    <button class="planet-button" data-planet="toi2768b">TOI-2768 b (Neptunian Desert)</button>
+                    <button class="planet-button" data-planet="proximaCentauriB">Proxima Centauri b (Super-Earth)</button>
+                    
+                </div>
+            </div>
+
+            <div id="screen-details" class="screen">
+                <button id="back-button">← Back</button>
+                <div id="details-view"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="randomStringGeneration.js"></script>
+</body>
+</html>
